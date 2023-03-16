@@ -80,8 +80,11 @@ banner
     border-radius: 0px;
     background-color: #edd472ef;
 }
-.nav-item:hover{
+.nav-item{
     border-radius: 5px;
+    padding: 5px;
+}
+.nav-item:hover{
     background-color: #c3aa4aef;
 }
 .navbar-brand
