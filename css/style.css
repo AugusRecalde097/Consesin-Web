@@ -78,8 +78,12 @@ banner
 }
 .navbar {
     border-radius: 0px;
+    background-color: #edd472ef;
 }
-
+.nav-item:hover{
+    border-radius: 5px;
+    background-color: #c3aa4aef;
+}
 .navbar-brand
 {
 	font-family: 'Chewy', cursive;
@@ -102,9 +106,9 @@ banner
     
 }
 @media (max-width: 768px) {
-	.navbar-collapse {
+	/* .navbar-collapse {
         background: #edd472ef;
-    }
+    } */
     .img-respons{
         width:30%;
         margin-left: 25%;
@@ -148,7 +152,7 @@ banner
 {
 	color: #fff;
     text-transform: uppercase;
-    background-color: rgb(211, 179, 0);
+    background-color: #d3b300;
 }
 .affix {
     background-color: #ffffff !important;
@@ -521,6 +525,7 @@ footer
 
 }
 @media (min-width: 220px) and (max-width: 551px){
+
     .img-respons{
         width:30%;
         margin-left: 10%;
