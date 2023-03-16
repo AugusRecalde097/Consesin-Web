@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sistema para el Control y Seguimiento de Síntomas</title>
+  <!-- <script src="js/dist/Chart.min.js"></script>
+  <script src="js/utils.js"></script> -->
+  <style>
+    canvas{
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+    }
+    </style>
+  <meta name="description" content="Consensin la nueva forma de llevar al día tu miastenia">
+  <meta name="keywords" content="Consensin la nueva forma de llevar al día tu miastenia">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Candal">
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+
+
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+  <!--banner-->
+  <section id="banner" class="banner">
+    <div class="bg-color">
+        <nav class="navbar navbar-default fixed-top navbar-expand-lg navbar-light top-nav-collapse ">
+          <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="#banner">Inicio</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#service">Servicios</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#about">Ventajas del Sistema</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#inscripcion">Registrate</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      <div class="container">
+        <div class="row">
+          <div class="banner-info">
+            <div class="banner-logo text-center">
+              <img src="img/logo.png" class="img-responsive" style="width: 450px;">
+            </div>
+            <div class="banner-text text-center"> 
+              <h1 class="banner-text">Mantente al día contigo</h1>
+              <p>Sabemos lo cambiante que puede ser la <b>Miastenia</b> <br>es por eso que desarrollamos esta herramienta<br>que te ayudará a llevar un mejor seguimiento de sus sintomas.</p>
+              <!-- <a href="#contact" class="btn btn-appoint">Dejar un aporte.</a> -->
+            </div>
+            <div class="overlay-detail text-center">
+              <a href="#service"><i class="fa fa-angle-down"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--/ banner-->
+  <!--service-->
+  <section id="service" style= "overflow: hidden;" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-sm-4">
+          <h2 class="ser-title">Nuestros servicios</h2>
+          <hr class="botm-line">
+          <p>Contamos con una serie de servicios que te acompañan a lo largo del día, cada uno pensado de la mejor manera para hacerlo fácil y rápido de usar las 24 horas del día, los 7 días de la semana.</p>
+          <!-- <canvas id="canvas" style="display: block; height: 563px; width: 1127px;" width="1200" height="800" class="chartjs-render-monitor"></canvas> -->
+        </div>
+        <div class="col-md-4 col-sm-4">
+          <div class="service-info">
+            <div class="icon">
+              <i class="fa fa-calendar-times-o"></i>
+            </div>
+            <div class="icon-info">
+              <h4 class="service-title">Historial diario de sintomas</h4>
+              <p>Con esta herramienta puede llevar un seguimiento detallado de los sintomas. Teniendo a disposición cual es el nivel de los sintomas, cuales fueron presentes en el día, etc.</p>
+            </div>
+          </div>
+          <div class="service-info">
+            <div class="icon">
+              <i class="fa fa-pencil"></i>
+            </div>
+            <div class="icon-info">
+              <h4 class="service-title">Evaluación de sintomas</h4>
+              <p>Posee una serie de evaluaciones estandares que usted puede realizar para tener un vistazo de cual es el nivel de gravedad de los sintomas que se presentan en ese momento.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-4">
+          <div class="service-info">
+            <div class="icon">
+              <i class="fa fa-user-md"></i>
+            </div>
+            <div class="icon-info">
+              <h4 class="service-title">Reporte semanal al médico</h4>
+              <p style="height:80px">Tiene la posibilidad de que al finalizar cáda semana se generará un resumen del estado del paciente y enviará al mail del médico cabecera.</p>
+            </div>
+          </div>
+          <div class="service-info">
+            <div class="icon">
+              <i class="fa fa-medkit"></i>
+            </div>
+            <div class="icon-info">
+              <h4 class="service-title">Control de medicación</h4>
+              <p>Tendrá la posibilidad de llevar un listado de la medicación. Así como la dosis a tomar y los horarios.</p>
+            </div>
+          </div>
+          <button id="randomizeData" hidden='true'>Randomize Data</button>
+        </div>
+      </div>
+    </div>
+    <img src="\img\modelo\registro_mes.jpg" class="img-respons">
+    <img src="\img\modelo\control.jpg" class="img-respons">
+    <img src="\img\modelo\medicacion.jpg" class="img-respons">
+    <!-- medicacion.jpg -->
+  </section>
+  <!--about-->
+  <section id="about" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-4 col-xs-12">
+          <div class="section-title">
+            <h2 class="head-title lg-line"> <b>CONSESIN</b><br> Una nueva forma de llevar registrados tus sintomas.</h2>
+            <hr class="botm-line">
+            <!-- <p class="sec-para">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua..</p> -->
+            <!-- <a href="" style="color: #a3b85f; padding-top:10px;">LEER MÁS</a> -->
+          </div>
+        </div>
+        <div class="col-md-9 col-sm-8 col-xs-12">
+          <div style="visibility: visible;" class="col-sm-9 more-features-box">
+              <div class="more-features-box-text">
+                <div class="more-features-box-text-icon"> <i class="fa fa-angle-right" aria-hidden="true"></i> </div>
+                <div class="more-features-box-text-description">
+                  <h3>Dedicada a la Miastenia</h3>
+                  <p>Se trabajó con <b>especialistas en la efermedad</b> con el objetivo de abarcar y tener presente todos los puntos importantes a tener en cuenta a la hora de controlar los sintomas.</p>
+                </div>
+              </div>
+            <div class="more-features-box-text">
+              <div class="more-features-box-text-icon"> <i class="fa fa-angle-right" aria-hidden="true"></i> </div>
+              <div class="more-features-box-text-description">
+                <h3>Simpre presente.</h3>
+                <p>La plataforma está a su disposición en <b>cualquier momento del día</b>, para que puede controlar sus sintomas o visualizar un historial cronologico de la enfermedad</p>
+              </div>
+            </div>
+            <div class="more-features-box-text">
+              <div class="more-features-box-text-icon"> <i class="fa fa-angle-right" aria-hidden="true"></i> </div>
+              <div class="more-features-box-text-description">
+                <h3>Disponible al alcance de la mano</h3>
+                <p>Al tratarse de una <b>plataforma móvil</b>,  está pensado para que lo acompañe a donde quiera que vaya.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--/ about-->
+  <!--cta 2-->
+  <section id="cta-2" class="section-padding">
+    <div class="container">
+      <div class=" row">
+        <div class="col-md-2"></div>
+        <div class="col-md-2 col-sm-2" >
+          <img src="img/doctor2jpg.png"  class="" style="width: 200px;">
+        </div>
+        <div class="col-md-4 col-sm-5" style="margin-top:2%">
+          La miastenia es una enfermedad que no se ve a simple vista y que afecta a muchas personas, no hay que dejarse vencer y tirar para delante. Puede que sea dificil, pero con ayuda de la familia y los médicos todo puede ser posible.
+          <p class="text-right text-primary"><i>— Cosme Fulanito, 2019</i></p>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+    </div>
+  </section>
+  <!--cta-->
+  <!--contact-->
+  <section id="inscripcion" style="height:100vh" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="ser-title">Registrarse</h2>
+          <hr class="botm-line">
+          <p>Sumate para poder llevar un control de tus sintomas mucho más cómoda y fácil</p>
+
+        </div>
+        </div>
+        <div class="container col-md-6">
+          <form>
+            <div class="mb-3 ">
+              <label for="inputName" class="col-4 col-form-label">Nombre</label>
+              <div class="col-8">
+                <input type="text" class="form-control" name="inputName" id="inputName" placeholder="">
+              </div>
+            </div>
+
+            <div class="mb-3 ">
+              <label for="inputName" class="col-4 col-form-label">Apellido</label>
+              <div class="col-8">
+                <input type="text" class="form-control" name="inputName" id="inputName" placeholder="">
+              </div>
+            </div>
+
+            <div class="mb-3 ">
+              <label for="" class="form-label">Email</label>
+              <div class="col-8">
+                <input type="email" class="form-control" name="" id="" aria-describedby="emailHelpId" placeholder="abc@mail.com">
+              </div>
+            </div>
+            
+            <div class="mb-3 ">
+              <label for="inputName" class="col-4 col-form-label">Contraseña</label>
+              <div class="col-8">
+                <input type="password" class="form-control" name="inputName" id="inputName" placeholder="">
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="" class="form-label">Sexo</label>
+              <div class="col-4">
+                <select class="form-select form-select-lg" name="" id="">
+                  <option selected>Seleccione uno</option>
+                  <option value="">Prefiere no decir</option>
+                  <option value="">Masculino</option>
+                  <option value="">Femenido</option>
+                </select>
+              </div>
+
+            </div>
+
+            <div class="mb-3 row padding-top">
+              <div class="offset-sm-4 col-sm-8">
+                <button type="submit" class="btn btn-verde">Guardar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </section> 
+  <section id="contact" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="ser-title">Contactenos</h2>
+          <hr class="botm-line">
+        </div>
+        <div class="col-md-8 col-sm-2">
+          <h3>Información de contacto</h3>
+          <div class="space"></div>
+          <p class="col-md-4" style="float:left"><i class="fa fa-map-marker fa-fw pull-left fa-2x"></i>Puerredon 1136<br> Formosa, Argentina</p>
+          <p class="col-md-4" style="float:left"><i class="fa fa-envelope-o fa-fw pull-left fa-2x"></i>info@consesin.com</p>
+          <p class="col-md-4" style="float:left"><i class="fa fa-phone fa-fw pull-left fa-2x"></i>+1 800 123 1234</p>
+        </div>
+      </div>
+    </div>
+  </section> 
+  <!--/ contact-->
+  <!--footer-->
+  <footer id="footer">
+    <div class="top-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-sm-4 marb20">
+            <div class="ftr-tle">
+              <h4 class="white" style="padding-left: 30px;">Siguenos en</h4>
+            </div>
+            <div class="info-sec">
+              <ul class="social-icon">
+                <a href="#"><li class=""><img src="img/facebook-ico.png" class="ico-social"></li></a>
+                <a href="#"><li class=""><img src="img/instagram-ico.png" class="ico-social"></li></a>
+                <!-- <a href="https://wa.me/543718526576"><li class=""><img src="img/whatsapp-ico.png" class="ico-social"></li></a>             -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </footer>
+  <!--/ footer-->
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery.easing.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/custom.js"></script>
+</body>
+
+</html>
