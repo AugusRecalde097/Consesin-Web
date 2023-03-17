@@ -1,5 +1,5 @@
 
-# Página presentación de Consesin
+# Consesin
 
 ![This is an image](/../Landding-PHP/img/bg-banner.jpg)
 
