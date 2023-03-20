@@ -1,147 +1,62 @@
-'use strict';
+function msg_alert(msg = "", type = "danger") {
+  //Si no, nos agrega un cartel de error.
+  $(".container").before(
+    '<div id="msg-alert" class="alert alert-' +
+      type +
+      ' d-flex align-items-center" role="alert" style="border: 3px solid white"><svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="' +
+      type +
+      '"></svg><div>' +
+      msg +
+      "</div></div>"
+  );
+  //Y elimina el cartel luego de 5 seg.
+  setTimeout(function () {
+    $("#msg-alert").remove();
+  }, 5000);
+}
 
-window.chartColors = {
-	red: 'rgb(255, 99, 132)',
-	orange: 'rgb(255, 159, 64)',
-	yellow: 'rgb(255, 205, 86)',
-	green: 'rgb(75, 192, 192)',
-	blue: 'rgb(54, 162, 235)',
-	purple: 'rgb(153, 102, 255)',
-	grey: 'rgb(201, 203, 207)'
-};
+function addUser() {
+  let form = $("#form_usuario");
+  //Es la comunicación del usuario al servidor.
+  dataPersona = {
+    nombre_persona: form.find("#nombre_persona").val(),
+    apellido_persona: form.find("#apellido_persona").val(),
+    fnacimiento_persona: form.find("#fnacimiento_persona").val(),
+    sexo_persona: form.find("#sexo_persona").val(),
+    mail_persona: form.find("#mail_persona").val(),
+    pass_persona: form.find("#pass_persona").val(),
+  };
 
-(function(global) {
-	var MONTHS = [
-		'January',
-		'February',
-		'March',
-		'April',
-		'May',
-		'June',
-		'July',
-		'August',
-		'September',
-		'October',
-		'November',
-		'December'
-	];
-
-	var COLORS = [
-		'#4dc9f6',
-		'#f67019',
-		'#f53794',
-		'#537bc4',
-		'#acc236',
-		'#166a8f',
-		'#00a950',
-		'#58595b',
-		'#8549ba'
-	];
-
-	var Samples = global.Samples || (global.Samples = {});
-	var Color = global.Color;
-
-	Samples.utils = {
-		// Adapted from http://indiegamr.com/generate-repeatable-random-numbers-in-js/
-		srand: function(seed) {
-			this._seed = seed;
-		},
-
-		rand: function(min, max) {
-			var seed = this._seed;
-			min = min === undefined ? 0 : min;
-			max = max === undefined ? 1 : max;
-			this._seed = (seed * 9301 + 49297) % 233280;
-			return min + (this._seed / 233280) * (max - min);
-		},
-
-		numbers: function(config) {
-			var cfg = config || {};
-			var min = cfg.min || 0;
-			var max = cfg.max || 1;
-			var from = cfg.from || [];
-			var count = cfg.count || 8;
-			var decimals = cfg.decimals || 8;
-			var continuity = cfg.continuity || 1;
-			var dfactor = Math.pow(10, decimals) || 0;
-			var data = [];
-			var i, value;
-
-			for (i = 0; i < count; ++i) {
-				value = (from[i] || 0) + this.rand(min, max);
-				if (this.rand() <= continuity) {
-					data.push(Math.round(dfactor * value) / dfactor);
-				} else {
-					data.push(null);
-				}
-			}
-
-			return data;
-		},
-
-		labels: function(config) {
-			var cfg = config || {};
-			var min = cfg.min || 0;
-			var max = cfg.max || 100;
-			var count = cfg.count || 8;
-			var step = (max - min) / count;
-			var decimals = cfg.decimals || 8;
-			var dfactor = Math.pow(10, decimals) || 0;
-			var prefix = cfg.prefix || '';
-			var values = [];
-			var i;
-
-			for (i = min; i < max; i += step) {
-				values.push(prefix + Math.round(dfactor * i) / dfactor);
-			}
-
-			return values;
-		},
-
-		months: function(config) {
-			var cfg = config || {};
-			var count = cfg.count || 12;
-			var section = cfg.section;
-			var values = [];
-			var i, value;
-
-			for (i = 0; i < count; ++i) {
-				value = MONTHS[Math.ceil(i) % 12];
-				values.push(value.substring(0, section));
-			}
-
-			return values;
-		},
-
-		color: function(index) {
-			return COLORS[index % COLORS.length];
-		},
-
-		transparentize: function(color, opacity) {
-			var alpha = opacity === undefined ? 0.5 : 1 - opacity;
-			return Color(color).alpha(alpha).rgbString();
-		}
-	};
-
-	// DEPRECATED
-	window.randomScalingFactor = function() {
-		return Math.round(Samples.utils.rand(-100, 100));
-	};
-
-	// INITIALIZATION
-
-	Samples.utils.srand(Date.now());
-
-	// Google Analytics
-	/* eslint-disable */
-	if (document.location.hostname.match(/^(www\.)?chartjs\.org$/)) {
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-		ga('create', 'UA-28909194-3', 'auto');
-		ga('send', 'pageview');
-	}
-	/* eslint-enable */
-
-}(this));
+  $.ajax({
+    url: "./db/submitForm.php",
+    type: "POST", //Tipo de método
+    data: dataPersona, //Dato enviado por POST al PHP
+    dataType: "JSON", //Tipo de respuesta
+    success: function (data) {
+      //Si todo sale bien el servidor responde.
+      //Si la respues es satifactoria.
+      if (data.respuesta == "success") {
+        msg_alert("Se eliminó correctamente", "success");
+        //Se elimina el comentario de la pantalla.
+        //Para no tener que recargar toda la página.
+        $("#comment-" + id).remove();
+        //Si la cantidad de comentarios es mayor a cero
+        if ($("#count-number").length > 0) {
+          //Se actualiza el número de comentarios.
+          var currentCount = parseInt($("#count-number").text());
+          var newCount = currentCount - 1;
+          $("#count-number").text(newCount);
+        }
+      } else {
+        //Si no, nos agrega un cartel de error.
+        $(".container").before(
+          '<div id="msg-error" class="alert alert-danger d-flex align-items-center" role="alert"><svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="danger:"></svg><div>No se pudo eliminar el comentario</div></div>'
+        );
+        //Y elimina el cartel luego de 5 seg.
+        setTimeout(function () {
+          $("#msg-error").remove();
+        }, 5000);
+      }
+    },
+  });
+}
