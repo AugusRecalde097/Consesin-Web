@@ -1,19 +1,5 @@
-function msg_alert(msg = "", type = "danger") {
-  //Si no, nos agrega un cartel de error.
-  $(".container").before(
-    '<div id="msg-alert" class="alert alert-' +
-      type +
-      ' d-flex align-items-center" role="alert" style="border: 3px solid white"><svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="' +
-      type +
-      '"></svg><div>' +
-      msg +
-      "</div></div>"
-  );
-  //Y elimina el cartel luego de 5 seg.
-  setTimeout(function () {
-    $("#msg-alert").remove();
-  }, 5000);
-}
+const toastLiveExample = document.getElementById('liveToast')
+const toast = new bootstrap.Toast(toastLiveExample)
 
 function addUser() {
   let form = $("#form_usuario");
@@ -36,27 +22,25 @@ function addUser() {
       //Si todo sale bien el servidor responde.
       //Si la respues es satifactoria.
       if (data.respuesta == "success") {
-        msg_alert("Se eliminó correctamente", "success");
-        //Se elimina el comentario de la pantalla.
-        //Para no tener que recargar toda la página.
-        $("#comment-" + id).remove();
-        //Si la cantidad de comentarios es mayor a cero
-        if ($("#count-number").length > 0) {
-          //Se actualiza el número de comentarios.
-          var currentCount = parseInt($("#count-number").text());
-          var newCount = currentCount - 1;
-          $("#count-number").text(newCount);
-        }
+        var form = document.createElement("form");
+        var nombrePersona_input = document.createElement("input"); 
+        nombrePersona_input.value = dataPersona.nombre_persona;
+        nombrePersona_input.name = 'nombre_persona';
+        nombrePersona_input.id = 'nombre_persona';
+    
+        form.method = "POST";
+        form.action = "./ver_pag_bienvenida.php";
+        form.id = "bienvenido";
+        form.style.display = 'nome';
+
+        form.appendChild(nombrePersona_input);
+        document.body.appendChild(form);
+    
+        form.submit();
       } else {
-        //Si no, nos agrega un cartel de error.
-        $(".container").before(
-          '<div id="msg-error" class="alert alert-danger d-flex align-items-center" role="alert"><svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="danger:"></svg><div>No se pudo eliminar el comentario</div></div>'
-        );
-        //Y elimina el cartel luego de 5 seg.
-        setTimeout(function () {
-          $("#msg-error").remove();
-        }, 5000);
+          toast.show();
       }
     },
   });
 }
+ 
