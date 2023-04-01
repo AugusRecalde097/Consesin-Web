@@ -15,8 +15,7 @@ $CONSE06_MAIL = $_POST["mail_persona"];
 $CONSE06_PASS = $_POST["pass_persona"];
 
 //Enviamos respuesta.-
-
-$pass_fuerte = password_hash($CONSE06_PASS, PASSWORD_BCRYPT);
+$pass_fuerte = password_hash($CONSE06_PASS, PASSWORD_BCRYPT,[19]);
 //Inserta los datos 
 $insertar_persona = "INSERT INTO conse_01_persona (conse01_nombre, conse01_apellido, conse01_sexo, conse01_fnacimiento) 
 VALUES ('$conse01_nombre', '$conse01_apellido',$conse01_sexo,'$conse01_fnacimiento')";
@@ -36,7 +35,6 @@ if($ejecutar === FALSE){
     //Si se elimina respondemos con un mensaje satisfactorio.
     $return_arr = array("respuesta"=>"success", "msg"=>"Se creo la cuenta correctamente");
 }
-
 
 echo json_encode($return_arr);
 

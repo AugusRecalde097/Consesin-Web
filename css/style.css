@@ -101,6 +101,9 @@ banner
 .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
     color: #EA6045;
 }
+.img-respons:hover{
+    width:40%;
+}
 .img-respons{
     width:10%;
     margin-left: 15%;
