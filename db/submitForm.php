@@ -15,7 +15,7 @@ $CONSE06_MAIL = $_POST["mail_persona"];
 $CONSE06_PASS = $_POST["pass_persona"];
 
 //Enviamos respuesta.-
-$pass_fuerte = password_hash($CONSE06_PASS, PASSWORD_BCRYPT,[19]);
+$pass_fuerte = password_hash($CONSE06_PASS, PASSWORD_BCRYPT);
 //Inserta los datos 
 $insertar_persona = "INSERT INTO conse_01_personas (conse01_nombre, conse01_apellido, conse01_sexo, conse01_fnacimiento) 
 VALUES ('$conse01_nombre', '$conse01_apellido',$conse01_sexo,'$conse01_fnacimiento')";
