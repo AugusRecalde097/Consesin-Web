@@ -4,6 +4,12 @@
     Author: BootstrapMade.com
     Author URL: https://bootstrapmade.com
 */
+.capaFlotante {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+}
 
 body {
 	font-family: 'Open Sans', sans-serif;
@@ -574,4 +580,8 @@ footer
     .banner-text h1{
         font-size: 24px;
     }
+}
+.tablerow{
+    cursor: pointer;
+    background: #ffb737;
 }

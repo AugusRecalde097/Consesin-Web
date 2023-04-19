@@ -5,7 +5,7 @@ require ('./vendor/autoload.php');
 include 'db/connect.php';
   
 use raelgc\view\Template;
-  $tpl = new Template("ver_alta_sintomas.html");
+  $tpl = new Template("ver_alta_parametros.html");
   $subform = "";
   for($i = 0; $i < 4; $i++){
 
