@@ -10,11 +10,14 @@
   <!-- Bootstrap CSS v5.2.1 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+
+
   
 
   <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" type="text/css" href="./css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
 </head>
 
 <body class="bg-color">
@@ -50,8 +53,11 @@
               </div>
               <div class="mb-3 row"><label for="inputName" class="col-4 col-form-label">Valor</label>
                 <div class="col-8">
-                  <input type="text" class="form-control" data-bs-toggle="collapse" href="#collapseExample" role="button"
-                  aria-expanded="false" aria-controls="collapseExample">
+                  <label id="label_grilla" class="form-control" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                  aria-expanded="false" aria-controls="collapseExample"></label>
+                  <input type="text" id="valor_grilla">
+                  <!-- <input type="text" class="form-control" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                  aria-expanded="false" aria-controls="collapseExample"> -->
                 </input>  
                 <!-- <input type="text" class="form-control" name="valor_parametro" id="valor_parametro"> -->
                 </div>
@@ -64,16 +70,14 @@
       </form>
       <div class="collapse z-3 position-absolute" id="collapseExample" style="width:50%; ">
         <div class="card shadow-sm p-3 mb-3 bg-body rounded" id="dato_grilla">
-          <table id="myTable" class="display compact" style="width:100%;">
+          <table id="myTable" class="display order-column" style="width:100%;"  data-order="[[ 1, &quot;asc&quot; ]]" >
             <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Office</th>
-                  <th>Extn.</th>
-                  <th>Start date</th>
-                  <th>Salary</th>
-                </tr>
+              <th>name</th>
+              <th>position</th>
+              <th>salary</th>
+              <th>start_date</th>
+              <th>office</th>
+              <th>extn</th>
             </thead>
         </table>
         </div>
@@ -106,10 +110,10 @@
   <!-- Bootstrap JavaScript Libraries -->
   <script src="js/jquery.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
     </script>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
     integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
     </script>
@@ -171,21 +175,61 @@
       $('#form_sintomas')[0].reset();
     }
 
-
-    document.addEventListener('DOMContentLoaded', function () {
-      $('#myTable').DataTable({
+    $(document).ready(function () {
+      var table = $('#myTable').DataTable({
         ajax: './ajax/data/arrays.txt',
-        scrollY: 400
+        scrollY: 400,
+        columns: [
+            { data: 'name' },
+            { data: 'position' },
+            { data: 'office' },
+            { data: 'extn' },
+            { data: 'start_date' },
+            { data: 'salary' },
+        ],
+        createdRow: function (row, data, index) {
+          console.log(data);
+          $(row).attr('id', data.id);
+        },
       });
+ 
+    $('#myTable tbody').on('click', 'tr', function () {
+
+        const grilla = $(this).parents('.collapse').attr('id');
+        const grillaCollapse = new bootstrap.Collapse('#' + grilla)
+        grillaCollapse.hide()
+        console.log($(this).attr('id'))
+        $("#valor_grilla").val($(this).attr('id'));
+        $("#label_grilla").val($(this).find('td'));
 
 
-      $('#myTable>tbody>tr').click(function (e) {
-      const grilla = $(e.target).parents('.collapse').attr('id');
-      const grillaCollapse = new bootstrap.Collapse('#' + grilla)
-      grillaCollapse.hide()
-      console.log($(e.target).parents('tr').attr('id'))
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+        } else {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
     });
-}, false);
+ 
+    // $('#button').click(function () {
+    //     table.row('.selected').remove().draw(false);
+    // });
+});
+
+
+
+
+//     document.addEventListener('DOMContentLoaded', function () {
+
+
+
+//       $('#myTable>tbody>tr').click(function (e) {
+//       const grilla = $(e.target).parents('.collapse').attr('id');
+//       const grillaCollapse = new bootstrap.Collapse('#' + grilla)
+//       grillaCollapse.hide()
+//       console.log($(e.target).parents('tr').attr('id'))
+//     });
+// }, false);
 
   </script>
 
