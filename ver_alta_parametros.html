@@ -55,7 +55,7 @@
                 <div class="col-8">
                   <label id="label_grilla" class="form-control" data-bs-toggle="collapse" href="#collapseExample" role="button"
                   aria-expanded="false" aria-controls="collapseExample"></label>
-                  <input type="text" id="valor_grilla">
+                  <input type="text" id="valor_grilla" hidden>
                   <!-- <input type="text" class="form-control" data-bs-toggle="collapse" href="#collapseExample" role="button"
                   aria-expanded="false" aria-controls="collapseExample"> -->
                 </input>  
@@ -72,12 +72,11 @@
         <div class="card shadow-sm p-3 mb-3 bg-body rounded" id="dato_grilla">
           <table id="myTable" class="table table-striped" style="width:100%;">
             <thead>
-              <th>name</th>
-              <th>position</th>
-              <th>salary</th>
-              <th>start_date</th>
-              <th>office</th>
-              <th>extn</th>
+              <th>Nombre</th>
+              <th>Posición</th>
+              <th>Oficina</th>
+              <th>Fecha Inicial</th>
+              <th>Salario</th>
             </thead>
         </table>
         </div>
@@ -197,7 +196,6 @@
             { data: 'name' },
             { data: 'position' },
             { data: 'office' },
-            { data: 'extn' },
             { data: 'start_date' },
             { data: 'salary' },
         ],

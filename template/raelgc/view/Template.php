@@ -338,6 +338,9 @@ namespace raelgc\view {
 		protected function setValue($varname, $value) {
 			$this->values['{'.$varname.'}'] = $value;
 		}
+		public function set_var($varname, $value) {
+			$this->setValue($varname, $value);
+		}
 
 		/**
 		 * Returns the value of the variable identified by $varname.
