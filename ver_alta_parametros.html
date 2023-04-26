@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Administrador de Sintomas</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+
+  
+
+  <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" href="./css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+</head>
+
+<body class="bg-color">
+  <header class="mb-3" style="background-color: #d6be60ef;">
+    <div class="container">
+      <div class="d-flex row justify-content-center align-items-center">
+        <div class="banner-text text-center col-4">
+          <h1 class="banner-text">Altas de sintomas</h1>
+        </div>
+        <div class="banner-logo text-center col-4 p-3">
+          <img src="img/logo.png" class="img-responsive mb-3" style="width: 50%">
+
+        </div>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="d-flex row justify-content-center align-items-center">
+      <div class="d-flex colum justify-content-center align-items-center">
+        <p>
+
+        </p>
+
+        <form id="form_sintomas">
+          <!-- Fin Grupo para cargar sintomas. -->
+          <!-- Grupo para cargar parametros de sintomas. -->
+          <div class="shadow-lg p-3 mb-5 bg-body rounded" id="subform">
+            <h2 class="ser-title mb-3">Parámetros de síntoma</h2>
+            <fieldset id="0" class="card shadow-sm p-3 mb-3 bg-body rounded">
+              <div class="mb-3 row"><label for="inputName" class="col-4 col-form-label">Grado</label>
+                <div class="col-8"><input type="text" class="form-control" name="grado_sintoma" id="grado_sintoma"
+                    value="0" disabled=""></div>
+              </div>
+              <div class="mb-3 row"><label for="inputName" class="col-4 col-form-label">Valor</label>
+                <div class="col-8">
+                  <label id="label_grilla" class="form-control" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                  aria-expanded="false" aria-controls="collapseExample"></label>
+                  <input type="text" id="valor_grilla" hidden>
+                  <!-- <input type="text" class="form-control" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                  aria-expanded="false" aria-controls="collapseExample"> -->
+                </input>  
+                <!-- <input type="text" class="form-control" name="valor_parametro" id="valor_parametro"> -->
+                </div>
+              </div>
+            </fieldset>
+            <!-- {ITEM} -->
+          </div>
+
+      </div>
+      </form>
+      <div class="collapse z-3 position-absolute" id="collapseExample" style="width:50%;">
+        <div class="card shadow-sm p-3 mb-3 bg-body rounded" id="dato_grilla">
+          <table id="myTable" class="table table-striped" style="width:100%;">
+            <thead>
+              <th>Nombre</th>
+              <th>Posición</th>
+              <th>Oficina</th>
+              <th>Fecha Inicial</th>
+              <th>Salario</th>
+            </thead>
+        </table>
+        </div>
+      </div>
+      <div class="mb-3 d-flex colum justify-content-around align-items-center col-sm-4">
+        <div class=" col-sm-4 text-center">
+          <button type="button" onclick="addSintomas()" class="btn btn-success">Guardar</button>
+        </div>
+        <div class="col-sm-4 text-center">
+          <button type="button" onclick="$('#form_sintomas')[0].reset()" class="btn btn-danger">Reset</button>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-danger text-white">
+          <strong class="me-auto">Error</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          Ha ocurrido un error al intentar registrarse.
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <!-- place footer here -->
+  </footer>
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="js/jquery.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+    </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+    </script>
+  <!-- <script src="js/custom.js"></script> -->
+  <script>
+    const liveToast = document.getElementById('liveToast')
+    const toast = new bootstrap.Toast(liveToast)
+    const form = $("#form_sintomas")
+    var table;
+    function handleRowSelect(tr){
+        const grilla = $(tr).parents('.collapse').attr('id');
+        const grillaCollapse = new bootstrap.Collapse('#' + grilla)
+        grillaCollapse.hide()
+        console.log($(tr).find('td')[0].textContent)
+        $("#valor_grilla").val($(tr).attr('id'));
+        $("#label_grilla").text($(tr).find('td')[0].textContent);
+
+
+        if ($(tr).hasClass('selected')) {
+            $(tr).removeClass('selected');
+        } else {
+          $('#myTable').find('tr.selected').removeClass('selected');
+            $(tr).addClass('selected');
+        }
+    }
+
+    function addSintomas() {
+
+      let subform = form.find('#subform').children('fieldset');
+      let fieldsSubform = [];
+
+      subform.each(function () {
+        let grado_sintoma = $(this).find('#grado_sintoma').val()
+        let valor_parametro = $(this).find('#valor_parametro').val()
+        fieldsSubform.push({
+          grado_sintoma: grado_sintoma,
+          valor_parametro: valor_parametro
+        });
+      })
+
+
+      let datosSintomas = {
+        tipo: 2,
+        fieldsForm: {
+          sintoma_titulo: form.find("#sintoma_titulo").val(),
+          sintoma_descri: form.find("#sintoma_descri").val(),
+          sintoma_instruccion: form.find("#sintoma_instruccion").val()
+        },
+        fieldsSubform: fieldsSubform
+      };
+
+      $.ajax({
+        url: "./db/submitForm_sintomas.php",
+        type: "POST", //Tipo de método
+        data: datosSintomas, //Dato enviado por POST al PHP
+        dataType: "JSON", //Tipo de respuesta
+        success: function (data) {
+          //Si todo sale bien el servidor responde.
+          //Si la respues es satifactoria.
+          if (!data.respuesta == "success") {
+            $(liveToast).find('.toast-header').addClass('bg-danger')
+            $(liveToast).find('.toast-header').removeClass('bg-succes')
+            $(liveToast).find('.toast-header strong').text('Ocurrio un error')
+            $(liveToast).find('.toast-body').text(data.msg)
+          } else {
+            $(liveToast).find('.toast-header').addClass('bg-success')
+            $(liveToast).find('.toast-header').removeClass('bg-danger')
+            $(liveToast).find('.toast-header strong').text('Éxito')
+            $(liveToast).find('.toast-body').text(data.msg)
+          }
+          toast.show();
+        }
+      });
+      $('#form_sintomas')[0].reset();
+    }
+
+    $(document).ready(function () {
+      table = $('#myTable').DataTable({
+        ajax: './ajax/data/arrays.txt',
+        columns: [
+            { data: 'name' },
+            { data: 'position' },
+            { data: 'office' },
+            { data: 'start_date' },
+            { data: 'salary' },
+        ],
+        language: {
+            url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json',
+        },
+        createdRow: function (row, data, index) {
+          $(row).attr("onclick", 'handleRowSelect(this)');
+          $(row).attr('id', data.id);
+        },
+      });
+});
+  </script>
+
+</body>
+
+</html>
